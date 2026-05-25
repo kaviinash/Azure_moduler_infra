@@ -4,3 +4,30 @@ module "resource_group" {
    resource_group_location = var.resource_group_location
 
 }
+
+module "virtual_network" {
+  source = "../modules/azurerm_virtual_network"
+   resource_group_name = module.resource_group.resource_group_name
+   virtual_network_name = var.virtual_network_name
+   virtual_network_address_space = var.virtual_network_address_space
+   depends_on = [module.resource_group]
+
+}
+
+module "frontend_subnet" {
+  source = "../modules/azurerm_subnet"
+   resource_group_name = module.resource_group.resource_group_name
+   virtual_network_name = module.virtual_network.virtual_network_output_block
+   subnet_name = var.subnet_name
+   subnet_address_prefixes = var.subnet_address_prefixes
+   depends_on = [module.virtual_network]
+   }
+
+module "backend_subnet" {
+  source = "../modules/azurerm_subnet"
+   resource_group_name = module.resource_group.resource_group_name
+   virtual_network_name = module.virtual_network.virtual_network_output_block
+   subnet_name = var.backend_subnet_name
+   subnet_address_prefixes = var.subnet_address_prefixes
+   depends_on = [module.virtual_network]
+   }
