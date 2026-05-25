@@ -16,7 +16,7 @@ override.tf.json
 *_override.tf.json
 
 # Terraform lock file (usually keep committed)
-# .terraform.lock.hcl
+.terraform.lock.hcl
 
 # CLI config files
 .terraformrc
