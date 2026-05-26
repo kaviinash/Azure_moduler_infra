@@ -9,9 +9,9 @@ resource "azurerm_key_vault" "key_vault"{
     location                    = data.azurerm_resource_group.resource_group_data_block.location
     resource_group_name         = data.azurerm_resource_group.resource_group_data_block.name
     tenant_id                   = data.azurerm_client_config.current.tenant_id
-    sku_name                    = var.sku_name
-    soft_delete_retention_days  = var.soft_delete_retention_days 
-    purge_protection_enabled     = var.purge_protection_enabled
-    enabled_for_deployment      = var.enabled_for_deployment  
-    enabled_for_template_deployment = var.enabled_for_template_deployment
+    sku_name                    = "standard"
+    soft_delete_retention_days  = "true" 
+    purge_protection_enabled     = "true"
+    enabled_for_deployment      = "true"  
+    enabled_for_template_deployment = "true"
 }
