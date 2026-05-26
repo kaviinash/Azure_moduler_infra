@@ -31,3 +31,11 @@ module "backend_subnet" {
    subnet_address_prefixes = var.subnet_address_prefixes
    depends_on = [module.virtual_network]
    }
+
+   module "public_ip" {
+    source = "../modules/azurerm_public_ip"
+     resource_group_name = module.resource_group.resource_group_name
+     public_ip_name = var.public_ip_name
+     public_ip_allocation_method = var.public_ip_allocation_method
+     depends_on = [module.resource_group]
+     }

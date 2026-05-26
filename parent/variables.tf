@@ -31,3 +31,11 @@ variable "backend_subnet_name" {
     description = "The name of the subnet."
     type        = string
 }
+
+variable "public_ip_name" {
+  type = string 
+}
+variable "public_ip_allocation_method" {
+  type    = string
+  default = "Static"
+}
