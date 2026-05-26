@@ -39,3 +39,8 @@ variable "public_ip_allocation_method" {
   type    = string
   default = "Static"
 }
+
+
+
+
+

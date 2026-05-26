@@ -39,3 +39,23 @@ module "backend_subnet" {
      public_ip_allocation_method = var.public_ip_allocation_method
      depends_on = [module.resource_group]
      }
+    
+  module "allow_ssh_rule" {
+    source = "../modules/azurerm_network_security_group"
+     resource_group_name = module.resource_group.resource_group_name
+     network_security_group_name = "allow-ssh-rule"
+     rules = {
+        allow_ssh = {
+            priority = 100
+            direction = "Inbound"
+            access = "Allow"
+            protocol = "Tcp"
+            source_port_ranges = ["*"]
+            destination_port_ranges = ["22"]
+            source_address_prefixes = ["*"]
+            destination_address_prefixes = ["*"]
+        }
+     }
+     depends_on = [module.resource_group]
+     }
+
