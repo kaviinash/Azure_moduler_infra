@@ -44,7 +44,15 @@ variable "public_ip_allocation_method" {
   default = "Static"
 }
 
+variable "frontend_network_security_group_name" {
+  description = "The name of the network security group to create."
+  type        = string
+}
 
+variable "backend_network_security_group_name" {
+  description = "The name of the network security group to create."
+  type        = string
+}
 
 
 

@@ -40,6 +40,28 @@ module "backend_subnet" {
      depends_on = [module.resource_group]
      }
     
+   module "frontend-network_security_group" {
+    source = "../modules/azurerm_network_security_group"
+    resource_group_name = module.resource_group.resource_group_name
+    network_security_group_name = var.frontend_network_security_group_name
+    security_rules = {
+        allow_ssh = {
+            priority = 100
+            direction = "Inbound"
+            access = "Allow"
+            protocol = "Tcp"
+            source_port_range = "*"
+            destination_port_range = "22"
+            source_address_prefix = "*"
+            destination_address_prefix = "*"
+            description = "Allow SSH traffic from any source to any destination on port 22."
+        }
+     }
+     depends_on = [module.resource_group]
+     }
+
+
+
    module "backend_public_ip" {
     source = "../modules/azurerm_public_ip"
      resource_group_name = module.resource_group.resource_group_name
@@ -48,4 +70,33 @@ module "backend_subnet" {
      depends_on = [module.resource_group]
      }
 
-     
+   module "backend-network_security_group" {
+    source = "../modules/azurerm_network_security_group"
+    resource_group_name = module.resource_group.resource_group_name
+    network_security_group_name = var.backend_network_security_group_name
+    security_rules = {
+        allow_ssh = {
+            priority = 110
+            direction = "Inbound"
+            access = "Allow"
+            protocol = "Tcp"
+            source_port_range = "*"
+            destination_port_range = "22"
+            source_address_prefix = "*"
+            destination_address_prefix = "*"
+            description = "Allow SSH traffic from any source to any destination on port 22."
+        }
+      allow_http = {
+            priority = 110
+            direction = "Inbound"
+            access = "Allow"
+            protocol = "Tcp"
+            source_port_range = "*"
+            destination_port_range = "8080"
+            source_address_prefix = "*"
+            destination_address_prefix = "*"
+            description = "Allow SSH traffic from any source to any destination on port 8080."
+        }
+     }
+     depends_on = [module.resource_group]
+     }
