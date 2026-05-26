@@ -18,7 +18,7 @@ module "frontend_subnet" {
   source = "../modules/azurerm_subnet"
    resource_group_name = module.resource_group.resource_group_name
    virtual_network_name = module.virtual_network.virtual_network_output_block
-   subnet_name = var.subnet_name
+   subnet_name = var.frontend_subnet_name
    subnet_address_prefixes = var.subnet_address_prefixes
    depends_on = [module.virtual_network]
    }
@@ -32,30 +32,20 @@ module "backend_subnet" {
    depends_on = [module.virtual_network]
    }
 
-   module "public_ip" {
+   module "frontend_public_ip" {
     source = "../modules/azurerm_public_ip"
      resource_group_name = module.resource_group.resource_group_name
-     public_ip_name = var.public_ip_name
+     public_ip_name = var.frontend_public_ip_name
      public_ip_allocation_method = var.public_ip_allocation_method
      depends_on = [module.resource_group]
      }
     
-  module "allow_ssh_rule" {
-    source = "../modules/azurerm_network_security_group"
+   module "backend_public_ip" {
+    source = "../modules/azurerm_public_ip"
      resource_group_name = module.resource_group.resource_group_name
-     network_security_group_name = "allow-ssh-rule"
-     rules = {
-        allow_ssh = {
-            priority = 100
-            direction = "Inbound"
-            access = "Allow"
-            protocol = "Tcp"
-            source_port_ranges = ["*"]
-            destination_port_ranges = ["22"]
-            source_address_prefixes = ["*"]
-            destination_address_prefixes = ["*"]
-        }
-     }
+     public_ip_name = var.backend_public_ip_name
+     public_ip_allocation_method = var.public_ip_allocation_method
      depends_on = [module.resource_group]
      }
 
+     

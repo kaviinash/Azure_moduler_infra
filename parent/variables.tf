@@ -17,7 +17,7 @@ variable "virtual_network_address_space" {
     type        = list(string)
 }
 
-variable "subnet_name" {
+variable "frontend_subnet_name" {
     description = "The name of the subnet."
     type        = string
 }
@@ -32,9 +32,13 @@ variable "backend_subnet_name" {
     type        = string
 }
 
-variable "public_ip_name" {
+variable "frontend_public_ip_name" {
   type = string 
 }
+variable "backend_public_ip_name" {
+  type = string 
+}
+
 variable "public_ip_allocation_method" {
   type    = string
   default = "Static"
