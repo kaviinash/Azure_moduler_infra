@@ -108,11 +108,6 @@ module "frontend_network_interface" {
   virtual_network_name = module.virtual_network.virtual_network_output_block
   subnet_name =           module.frontend_subnet.subnet_name
   network_security_group_name = var.frontend_network_security_group_name
-  depends_on = [ module.frontend_subnet ]
-   
-
-
-  
+  depends_on = [ module.frontend_subnet ]     
 }
 
- 
