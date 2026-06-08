@@ -111,3 +111,14 @@ module "frontend_network_interface" {
   depends_on = [ module.frontend_subnet ]     
 }
 
+module "back_network_interface" {
+  source = "../modules/azurerm_network_interface"
+  resource_group_name = module.resource_group.resource_group_name
+  network_interface_name = var.backend_network_interface_name
+  network_interface_ip_configuration_name = var.backend_nic_ip_config_name
+  public_ip_name =       module.backend_public_ip.public_ip_name
+  virtual_network_name = module.virtual_network.virtual_network_output_block
+  subnet_name =           module.backend_subnet.subnet_name
+  network_security_group_name = var.frontend_network_security_group_name
+  depends_on = [ module.backend_subnet ]     
+}

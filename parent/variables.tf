@@ -64,5 +64,10 @@ variable "front_end_nic_ip_config_name" {
   type = string
 }
 
+variable "backend_network_interface_name" {
+  
+}
 
-
+variable "backend_nic_ip_config_name" {
+  
+}
