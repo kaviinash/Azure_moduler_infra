@@ -59,9 +59,7 @@ module "backend_subnet" {
      }
      depends_on = [module.resource_group]
      }
-
-
-
+   
    module "backend_public_ip" {
     source = "../modules/azurerm_public_ip"
      resource_group_name = module.resource_group.resource_group_name
@@ -100,3 +98,21 @@ module "backend_subnet" {
      }
      depends_on = [module.resource_group]
      }
+
+module "frontend_network_interface" {
+  source = "../modules/azurerm_network_interface"
+  resource_group_name = module.resource_group.resource_group_name
+  network_interface_name = var.frontend_network_interface_name
+  network_interface_ip_configuration_name = var.front_end_nic_ip_config_name
+  public_ip_name =       module.frontend_public_ip.public_ip_name
+  virtual_network_name = module.virtual_network.virtual_network_output_block
+  subnet_name =           module.frontend_subnet.subnet_name
+  network_security_group_name = var.frontend_network_security_group_name
+  depends_on = [ module.frontend_subnet ]
+   
+
+
+  
+}
+
+ 

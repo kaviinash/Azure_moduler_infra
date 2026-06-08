@@ -54,5 +54,15 @@ variable "backend_network_security_group_name" {
   type        = string
 }
 
+variable "frontend_network_interface_name" {
+  description = "The name of the network interface to create for the frontend subnet."
+  type        = string
+}
+
+variable "front_end_nic_ip_config_name" {
+  description = "The name of front end NIC IP Configuration"
+  type = string
+}
+
 
 
