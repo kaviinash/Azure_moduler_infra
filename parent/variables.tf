@@ -71,3 +71,53 @@ variable "backend_network_interface_name" {
 variable "backend_nic_ip_config_name" {
   
 }
+
+variable "key_vault_name" {
+  type = string 
+}
+variable "frontend_username_key" {
+  
+}
+variable "frontend_username_value" {
+  
+}
+
+variable "frontend_password_key" {
+  
+}
+
+variable "frontend_password_value" {
+  
+}
+
+variable "backend_username_key" {
+  
+}
+
+variable "backend_username_value" {
+  
+}
+
+variable "backend_password_key" {
+  
+}
+
+variable "backend_password_value" {
+  
+}
+
+variable "sql_server_admin_login_key" {
+  
+}
+
+variable "sql_server_admin_login_value" {
+  
+}
+
+variable "sql_server_admin_password_key" {
+  
+}
+
+variable "sql_Server_admin_password_value" {
+  
+}

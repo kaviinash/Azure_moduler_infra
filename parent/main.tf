@@ -122,3 +122,36 @@ module "back_network_interface" {
   network_security_group_name = var.frontend_network_security_group_name
   depends_on = [ module.backend_subnet ]     
 }
+
+module "key_vault" {
+  source = "../modules/azurerm_key_vault"
+  resource_group_name = module.resource_group.resource_group_name
+  key_vault_name = var.key_vault_name
+  depends_on = [ module.resource_group ]
+  
+}
+
+module "key_vault_secrets" {
+  source = "../modules/azurerm_key_vault_secret"
+  resource_group_name = module.resource_group.resource_group_name
+  key_vault_name = module.key_vault.key_vault_output_block
+
+  frontend_vm_admin_username_key =  var.frontend_username_key
+  frontend_vm_admin_username_value = var.frontend_username_value
+  frontend_vm_admin_password_key =  var.frontend_password_key
+  frontend_vm_admin_password_value = var. frontend_password_value
+
+  backend_vm_admin_username_key =  var.backend_username_key
+  backend_vm_admin_username_value = var.backend_username_value
+  backend_vm_admin_password_key =  var.backend_password_key
+  backend_vm_admin_password_value = var.backend_password_value
+
+  sql_server_admin_login_key = var.sql_server_admin_login_key
+  sql_server_admin_login_value = var. sql_server_admin_login_value
+  sql_server_admin_password_key = var.sql_server_admin_password_key
+  sql_server_admin_password_value = var.sql_Server_admin_password_value
+
+  depends_on = [ module.key_vault,module.resource_group ]
+
+
+}
